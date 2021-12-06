@@ -23,10 +23,11 @@ def data_extraction():
 def display_data(rslt):
     print("Latest earthquake according to BMKG")
     print("Date:", rslt["date"])
-    # print(f"Date {rslt["date"]}")
-    # #format string method apparently does not work on python 3.8
     print("Time:", rslt["time"])
     print("Magnitude:", rslt["magnitude"])
     print("Location:", "LS =", rslt["location"]["ls"], "BT =", rslt["location"]["bt"])
     print("Epicenter:", rslt["epicenter"])
     print("Observed:", rslt["observed"])
+    # print(f"Date {rslt["date"]}")
+    # #format string method apparently does not work on python 3.8
+    #to do: try using Python 3.9 and change the string concatenation using the string format method
