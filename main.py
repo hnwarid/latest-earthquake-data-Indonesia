@@ -2,9 +2,9 @@
 Latest eartquake detection data application
 MODULARIZATION WITH FUNCTION
 """
-from latest_earthquake import data_extraction, display_data
+import latest_earthquake
 
 if __name__ == "__main__":
     print("Main Application")
-    result = data_extraction()
-    display_data(result)
+    result = latest_earthquake.data_extraction()
+    latest_earthquake.display_data(result)
