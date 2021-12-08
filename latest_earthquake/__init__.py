@@ -68,7 +68,7 @@ def display_data(result):
     print("Time:", result["time"])
     print("Magnitude:", result["magnitude"])
     print("Depth:", result["depth"])
-    print("Location:", "LS:", result["location"][0], "BT =", result["location"][1])
+    print("Location:", "LS =", result["location"][0], "BT =", result["location"][1])
     print("Epicenter:", result["epicenter"])
     print("Observed:", result["observed"])
     # print(f"Date {rslt["date"]}")
