@@ -4,11 +4,14 @@ from bs4 import BeautifulSoup
 
 def data_extraction():
     """
+    This package scrapes the latest earthquake data from BMKG Indonesia website
+    Requires: BeautifulSoup4 and Requests
+    Example data shown:
     Date: 06 Desember 2021
     Time: 09:39:55 WIB
     Magnitude: 4.9
     Depth: 10 km
-    Location: LS=8.72 BT=118.36
+    Location: LS = 8.72 LS BT = 118.36 BT
     Epicenter: Pusat gempa berada di Laut 23 Km Barat Daya Dompu
     Observed: Dirasakan (Skala MMI): III Dompu, III Bima
     """
@@ -78,3 +81,6 @@ def display_data(result):
 
 if __name__ == "__main__":
     print("Test. \nThis is a latest earthquake data package")
+    # Using the lines below this file will work on its own:
+    # result = data_extraction()
+    # display_data(result)
