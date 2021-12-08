@@ -11,7 +11,6 @@ def data_extraction():
     Location: LS=8.72 BT=118.36
     Epicenter: Pusat gempa berada di Laut 23 Km Barat Daya Dompu
     Observed: Dirasakan (Skala MMI): III Dompu, III Bima
-    :return:
     """
     try:
         content = requests.get("https://bmkg.go.id")
@@ -24,15 +23,16 @@ def data_extraction():
         latest_datetime = latest_datetime.text.split(", ")
         latest_date = latest_datetime[0]
         latest_time = latest_datetime[1]
-        result = soup.find("div", {"class": "col-md-6 col-xs-6 gempabumi-detail no-padding"})
-        result = result.findChildren("li")
+
+        earthquake_data = soup.find("div", {"class": "col-md-6 col-xs-6 gempabumi-detail no-padding"})
+        earthquake_data = earthquake_data.findChildren("li")
         i = 0
         latest_magnitude = None
         latest_depth = None
         latest_location = None
         latest_epicenter = None
         latest_observed = None
-        for li in result:
+        for li in earthquake_data:
             if i == 1:
                 latest_magnitude = li.text
             elif i == 2:
@@ -41,43 +41,39 @@ def data_extraction():
                 latest_location = li.text.split(" - ")
             elif i == 4:
                 latest_epicenter = li.text
-            elif i ==5:
+            elif i == 5:
                 latest_observed = li.text
             i += 1
 
-        # latest_magnitude = soup.find("span", {"class": "ic magnitudo"})
-        # latest_magnitude = latest_magnitude.text
-        # latest_location = soup.find("span", {"class": "ic koordinat"})
-
-        rslt = dict()
-        rslt["date"] = latest_date  # "06 Desember 2021"
-        rslt["time"] = latest_time  # "09:39:55 WIB"
-        rslt["magnitude"] = latest_magnitude  # 4.9
-        rslt["depth"] = latest_depth  # 7.0
-        rslt["location"] = latest_location  # {"ls": 8.72, "bt": 118.36}
-        rslt["epicenter"] = latest_epicenter  # "Pusat gempa berada di Laut 23 Km Barat Daya Dompu"
-        rslt["observed"] = latest_observed  # "Dirasakan (Skala MMI): III Dompu, III Bima"
-        return rslt
+        result = dict()
+        result["date"] = latest_date
+        result["time"] = latest_time
+        result["magnitude"] = latest_magnitude
+        result["depth"] = latest_depth
+        result["location"] = latest_location
+        result["epicenter"] = latest_epicenter
+        result["observed"] = latest_observed
+        return result
     else:
         return None
 
 
-def display_data(rslt):
-    if rslt is None:
+def display_data(result):
+    if result is None:
         print("cannot find the latest earthquake data")
         return
 
     print("Latest earthquake according to BMKG")
-    print("Date:", rslt["date"])
-    print("Time:", rslt["time"])
-    print("Magnitude:", rslt["magnitude"])
-    print("Depth:", rslt["depth"])
-    print("Location:", "LS:", rslt["location"][0], "BT =", rslt["location"][1])
-    print("Epicenter:", rslt["epicenter"])
-    print("Observed:", rslt["observed"])
+    print("Date:", result["date"])
+    print("Time:", result["time"])
+    print("Magnitude:", result["magnitude"])
+    print("Depth:", result["depth"])
+    print("Location:", "LS:", result["location"][0], "BT =", result["location"][1])
+    print("Epicenter:", result["epicenter"])
+    print("Observed:", result["observed"])
     # print(f"Date {rslt["date"]}")
     # #format string method apparently does not work on python 3.8
-    # to do: try using Python 3.9 and change the string concatenation using the string format method
+    # to do: try using Python 3.9 and change the string concatenation with the string format method
 
 
 if __name__ == "__main__":
