@@ -82,12 +82,12 @@ class LatestEarthquakeNews:
         # #format string method apparently does not work on python 3.8
         # to do: try using Python 3.9 and change the string concatenation with the string format method
 
+    def run(self):
+        self.data_extraction()
+        self.display_data()
+
 
 if __name__ == "__main__":
     earthquake_in_indonesia = LatestEarthquakeNews()
-    print("Package description:", earthquake_in_indonesia.description)
-    # Using the lines below this file will work on its own:
-    # result = data_extraction()
-    # display_data()
-    earthquake_in_indonesia.data_extraction()
-    earthquake_in_indonesia.display_data()
+    print(f"Package description: {earthquake_in_indonesia.description}")
+    earthquake_in_indonesia.run()
